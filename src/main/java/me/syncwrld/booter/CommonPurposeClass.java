@@ -124,11 +124,11 @@ public class CommonPurposeClass {
         .replace("@dir", System.getProperty("user.dir"));
   }
 
-  public boolean saveFile(String path, String file) {
+  public boolean saveFile(String path, String file, Class<?> clazz) {
     Preconditions.checkNotNull(path, "Path cannot be null");
     Preconditions.checkNotNull(file, "File cannot be null");
 
-    InputStream resource = getResource(file, CommonPurposeClass.class);
+    InputStream resource = getResource(file, clazz);
     if (resource == null) {
       return false;
     }
@@ -147,4 +147,7 @@ public class CommonPurposeClass {
       throw new RuntimeException(e);
     }
   }
+
+
+
 }
