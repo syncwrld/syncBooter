@@ -6,7 +6,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.managers.Presence;
 
 @Getter
@@ -82,10 +81,5 @@ public class BooterJDA {
     jda.shutdown();
   }
 
-  public void log(String message) {
-
-  }
-
-
-
+  public void log(String message) {}
 }
