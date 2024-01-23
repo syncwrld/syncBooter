@@ -15,7 +15,7 @@ public class CommonPurposeClass {
     Preconditions.checkNotNull(resource, "Resource cannot be null");
     Preconditions.checkNotNull(clazz, "Resource Provider Class cannot be null");
 
-    URL resURL = clazz.getResource(resource);
+    URL resURL = clazz.getClassLoader().getResource(resource);
 
     if (resURL == null) {
       return null;
@@ -147,7 +147,4 @@ public class CommonPurposeClass {
       throw new RuntimeException(e);
     }
   }
-
-
-
 }
