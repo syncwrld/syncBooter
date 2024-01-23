@@ -141,10 +141,13 @@ public class CommonPurposeClass {
     }
 
     try {
-      Files.copy(resource, pathFile.toPath());
+      Files.copy(resource, new File(pathFile, file).toPath());
       return true;
     } catch (IOException e) {
-      throw new RuntimeException(e);
+      if (!e.getCause().getMessage().contains("File exists")) {
+        throw new RuntimeException(e);
+      }
+      return false;
     }
   }
 }
