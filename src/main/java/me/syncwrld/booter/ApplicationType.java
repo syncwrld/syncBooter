@@ -10,7 +10,8 @@ public enum ApplicationType {
   GENERAL_JAVA("Java"),
   BUKKIT_PLUGIN("Spigot"),
   VELOCITY_PLUGIN("Velocity"),
-  BUNGEECORD_PLUGIN("Bungeecord");
+  BUNGEECORD_PLUGIN("Bungeecord"),
+  UNDERTEMINED("Undertemined");
 
   private final String beautifulName;
 
