@@ -8,13 +8,19 @@ public interface ApplicationBootstrapper {
 
   void disable();
 
-  default void start(ApplicationLoader appLoader) {
+  default void start(
+      ApplicationLoader appLoader, Class<? extends ApplicationBootstrapper> bootstrapperClass) {
     Method method = null;
     try {
       method = appLoader.getClass().getMethod("setBootstrapper", ApplicationBootstrapper.class);
       method.setAccessible(true);
 
-      method.invoke(appLoader, this);
+      try {
+        method.invoke(appLoader, bootstrapperClass.newInstance());
+      } catch (InstantiationException e) {
+        throw new RuntimeException(e);
+      }
+
     } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
       throw new RuntimeException(e);
     }
