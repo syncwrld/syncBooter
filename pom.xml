@@ -178,9 +178,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.reflections</groupId>
+            <groupId>com.github.syncwrld</groupId>
             <artifactId>reflections</artifactId>
-            <version>0.9.12</version>
+            <version>v0.10.2.1</version>
         </dependency>
 
         <dependency>
