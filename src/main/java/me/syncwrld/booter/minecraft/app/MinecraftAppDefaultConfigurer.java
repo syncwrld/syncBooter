@@ -31,5 +31,7 @@ public class MinecraftAppDefaultConfigurer {
         }
       };
     }
+
+    return null;
   }
 }
