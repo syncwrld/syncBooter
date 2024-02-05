@@ -23,6 +23,10 @@ public class Booter {
     handler.setFormatter(formatter);
     logger.getParent().addHandler(handler);
 
+    if (Constants.LOGGER == null) {
+      Constants.LOGGER = logger;
+    }
+
     return logger;
   }
 
@@ -43,7 +47,8 @@ public class Booter {
       boolean setJDAApp = cmdLine.hasOption("jdaapp");
 
       if (setJavaApp && setJDAApp) {
-        getLogger().info("Both application types specified, defaulting to general java application");
+        getLogger()
+            .info("Both application types specified, defaulting to general java application");
         return;
       }
 
