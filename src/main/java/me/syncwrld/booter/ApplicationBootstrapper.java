@@ -8,7 +8,7 @@ public interface ApplicationBootstrapper {
 
   void disable();
 
-  default void start(
+  public default void start(
       ApplicationLoader appLoader, Class<? extends ApplicationBootstrapper> bootstrapperClass) {
     Method method = null;
     try {
