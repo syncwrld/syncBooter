@@ -24,8 +24,8 @@ public interface DatabaseHelper {
   default PreparedStatement prepare(Connection connection, String query) {
     return Async.run(
             () -> {
-              try {
-                return connection.prepareStatement(query);
+              try (PreparedStatement prepared = connection.prepareStatement(query)) {
+                return prepared;
               } catch (SQLException e) {
                 throw new RuntimeException(e);
               }
@@ -40,6 +40,12 @@ public interface DatabaseHelper {
                 return prepared.executeQuery();
               } catch (SQLException e) {
                 throw new RuntimeException(e);
+              } finally {
+                try {
+                  prepared.close();
+                } catch (SQLException e) {
+                  e.printStackTrace();
+                }
               }
             })
         .join();
@@ -86,6 +92,12 @@ public interface DatabaseHelper {
     } catch (SQLException e) {
       e.printStackTrace();
       return false;
+    } finally {
+      try {
+        prepared.close();
+      } catch (SQLException e) {
+        e.printStackTrace();
+      }
     }
   }
 
