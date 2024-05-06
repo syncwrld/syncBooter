@@ -36,8 +36,8 @@ public interface DatabaseHelper {
   default ResultSet result(PreparedStatement prepared) {
     return Async.run(
             () -> {
-              try {
-                return prepared.executeQuery();
+              try (ResultSet resultSet = prepared.executeQuery()) {
+                return resultSet;
               } catch (SQLException e) {
                 throw new RuntimeException(e);
               } finally {
