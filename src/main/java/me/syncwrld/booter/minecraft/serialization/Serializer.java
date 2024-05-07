@@ -37,7 +37,7 @@ public class Serializer {
       short durability = stack.getDurability();
       val data = stack.getData();
 
-      itemData.put("type", gson.toJson(type));
+      itemData.put("type", gson.toJson(type, Material.class));
       if ((enchantments != null) && !enchantments.isEmpty())
         itemData.put("enchantments", gson.toJson(enchantments));
       if (stack.hasItemMeta()) itemData.put("meta", gson.toJson(itemMeta, ItemMeta.class));
@@ -74,7 +74,7 @@ public class Serializer {
 
       Map<String, Object> itemData = gson.fromJson(itemDataJson, HashMap.class);
 
-      val type = Material.valueOf((String) itemData.get("type"));
+      Material type = gson.fromJson((String) itemData.get("type"), Material.class);
       Map<Enchantment, Integer> enchantments =
           gson.fromJson((String) itemData.get("enchantments"), HashMap.class);
       int amount = (int) itemData.get("amount");
