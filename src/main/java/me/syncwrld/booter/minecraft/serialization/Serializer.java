@@ -6,6 +6,7 @@ import java.util.Map;
 import lombok.val;
 import me.syncwrld.booter.Constants;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
@@ -24,6 +25,9 @@ public class Serializer {
 
     int index = 0;
     for (ItemStack stack : content) {
+      if (stack == null || stack.getType() == Material.AIR)
+        continue;
+      
       Map<String, Object> itemData = new HashMap<>();
 
       // Item properties
