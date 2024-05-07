@@ -3,7 +3,6 @@ package me.syncwrld.booter.minecraft.serialization;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
-
 import lombok.val;
 import me.syncwrld.booter.Constants;
 import org.bukkit.Bukkit;
@@ -34,11 +33,14 @@ public class Serializer {
       short durability = stack.getDurability();
       val data = stack.getData();
 
-      itemData.put("enchantments", gson.toJson(enchantments));
+      if ((enchantments != null) && !enchantments.isEmpty())
+        itemData.put("enchantments", gson.toJson(enchantments));
+      if (stack.hasItemMeta()) itemData.put("meta", gson.toJson(itemMeta, ItemMeta.class));
+      if (data != null) itemData.put("data", gson.toJson(data, MaterialData.class));
+
+
       itemData.put("amount", amount);
-      itemData.put("meta", gson.toJson(itemMeta, ItemMeta.class));
       itemData.put("durability", durability);
-      itemData.put("data", gson.toJson(data, MaterialData.class));
 
       items.put(index, gson.toJson(itemData));
       itemData.clear();
@@ -76,9 +78,14 @@ public class Serializer {
       MaterialData data = gson.fromJson((String) itemData.get("data"), MaterialData.class);
 
       ItemStack itemStack = new ItemStack(data.getItemType(), amount, durability);
-      itemStack.setItemMeta(itemMeta);
+
+      if (itemMeta != null)
+        itemStack.setItemMeta(itemMeta);
+
       itemStack.setData(data);
-      itemStack.addUnsafeEnchantments(enchantments);
+
+      if (enchantments != null)
+        itemStack.addUnsafeEnchantments(enchantments);
 
       contents[index] = itemStack;
     }
@@ -112,7 +119,9 @@ public class Serializer {
       ItemStack itemStack = new ItemStack(data.getItemType(), amount, durability);
       itemStack.setItemMeta(itemMeta);
       itemStack.setData(data);
-      itemStack.addUnsafeEnchantments(enchantments);
+
+      if (enchantments != null)
+        itemStack.addUnsafeEnchantments(enchantments);
 
       inventory.setItem(index, itemStack);
     }
