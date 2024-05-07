@@ -20,7 +20,7 @@ public class Serializer {
 
   public String serializeInventory(InventoryType inventoryType, Inventory inventory) {
     ItemStack[] content = inventory.getContents();
-    Map<String, Object> serializationMap = new HashMap<>();
+    Map<Object, Object> serializationMap = new HashMap<>();
     Map<Integer, String> items = new HashMap<>();
 
     int index = 0;
