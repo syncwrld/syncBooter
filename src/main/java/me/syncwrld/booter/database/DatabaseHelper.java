@@ -73,6 +73,7 @@ public interface DatabaseHelper {
     }
 
     String query = "create table if not exists " + name + componentQuery.toString();
+    System.out.println(query);
     PreparedStatement prepared = prepare(connection, query);
 
     try {
@@ -84,24 +85,23 @@ public interface DatabaseHelper {
   }
 
   public default void clearValues(Connection connection, int tableID) {
-    if (this instanceof IdentifiableRepository) {
-      IdentifiableRepository identifiableRepository = (IdentifiableRepository) this;
-      Map<String, Integer> tableIDs = identifiableRepository.getTableIDs();
-      Map.Entry<String, Integer> tableEntry =
-          tableIDs.entrySet().stream()
-              .filter(e -> e.getValue() == tableID)
-              .findFirst()
-              .orElse(null);
+    if (!(this instanceof IdentifiableRepository)) {
+      throw new RuntimeException("Class must be a IdentifiableRepository to be able to clear values programmatically.");
+    }
 
-      if (tableEntry != null) {
-        String table = tableEntry.getKey();
-        String query = "truncate table " + table;
-        PreparedStatement prepared = prepare(connection, query);
-        try {
-          prepared.executeUpdate();
-        } catch (SQLException e) {
-          e.printStackTrace();
-        }
+    IdentifiableRepository identifiableRepository = (IdentifiableRepository) this;
+    Map<String, Integer> tableIDs = identifiableRepository.getTableIDs();
+    Map.Entry<String, Integer> tableEntry =
+        tableIDs.entrySet().stream().filter(e -> e.getValue() == tableID).findFirst().orElse(null);
+
+    if (tableEntry != null) {
+      String table = tableEntry.getKey();
+      String query = "truncate table " + table;
+      PreparedStatement prepared = prepare(connection, query);
+      try {
+        prepared.executeUpdate();
+      } catch (SQLException e) {
+        e.printStackTrace();
       }
     }
   }
