@@ -78,7 +78,7 @@ public interface DatabaseHelper {
       }
     }
 
-    String query = "create table if not exists ?" + componentQuery.toString();
+    String query = "create table if not exists " + componentQuery.toString();
     PreparedStatement prepared = prepare(connection, query);
 
     try {
