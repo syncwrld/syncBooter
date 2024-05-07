@@ -63,11 +63,11 @@ public class Serializer {
 
     InventoryType inventoryType =
         gson.fromJson((String) deserializationMap.get("type"), InventoryType.class);
-    Map<Integer, String> itemsMap = gson.fromJson(gson.toJson(deserializationMap.get("content")), HashMap.class);
+    Map<Object, String> itemsMap = gson.fromJson(gson.toJson(deserializationMap.get("content")), HashMap.class);
 
     ItemStack[] contents = new ItemStack[inventoryType.getDefaultSize()];
 
-    for (Map.Entry<Integer, String> entry : itemsMap.entrySet()) {
+    for (Map.Entry<Object, String> entry : itemsMap.entrySet()) {
       int index = gson.fromJson(entry.getKey().toString(), Integer.class);
       String itemDataJson = entry.getValue();
 
@@ -78,10 +78,9 @@ public class Serializer {
           gson.fromJson((String) itemData.get("enchantments"), HashMap.class);
       int amount = gson.fromJson((String) itemData.get("amount"), Integer.class);
       ItemMeta itemMeta = gson.fromJson((String) itemData.get("meta"), ItemMeta.class);
-      short durability = (gson.fromJson((String) itemData.get("durability"), Short.class));
       MaterialData data = gson.fromJson((String) itemData.get("data"), MaterialData.class);
 
-      ItemStack itemStack = new ItemStack(type, amount, durability);
+      ItemStack itemStack = new ItemStack(type, amount);
 
       if (itemMeta != null) itemStack.setItemMeta(itemMeta);
 
@@ -115,10 +114,9 @@ public class Serializer {
           gson.fromJson((String) itemData.get("enchantments"), HashMap.class);
       int amount = gson.fromJson((String) itemData.get("amount"), Integer.class);
       ItemMeta itemMeta = gson.fromJson((String) itemData.get("meta"), ItemMeta.class);
-      short durability = gson.fromJson((String) itemData.get("durability"), Short.class);
       MaterialData data = gson.fromJson((String) itemData.get("data"), MaterialData.class);
 
-      ItemStack itemStack = new ItemStack(data.getItemType(), amount, durability);
+      ItemStack itemStack = new ItemStack(data.getItemType(), amount);
       itemStack.setItemMeta(itemMeta);
       itemStack.setData(data);
 
@@ -129,4 +127,5 @@ public class Serializer {
 
     return inventory;
   }
+  
 }
