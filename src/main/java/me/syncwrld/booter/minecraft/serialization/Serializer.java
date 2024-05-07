@@ -25,12 +25,12 @@ public class Serializer {
 
     int index = 0;
     for (ItemStack stack : content) {
-      if (stack == null || stack.getType() == Material.AIR)
-        continue;
-      
+      if (stack == null || stack.getType() == Material.AIR) continue;
+
       Map<String, Object> itemData = new HashMap<>();
 
       // Item properties
+      val type = stack.getType();
       val enchantments = stack.getEnchantments();
       int amount = stack.getAmount();
       val itemMeta = stack.getItemMeta();
@@ -41,7 +41,6 @@ public class Serializer {
         itemData.put("enchantments", gson.toJson(enchantments));
       if (stack.hasItemMeta()) itemData.put("meta", gson.toJson(itemMeta, ItemMeta.class));
       if (data != null) itemData.put("data", gson.toJson(data, MaterialData.class));
-
 
       itemData.put("amount", amount);
       itemData.put("durability", durability);
@@ -74,6 +73,7 @@ public class Serializer {
 
       Map<String, Object> itemData = gson.fromJson(itemDataJson, HashMap.class);
 
+      val type = Material.valueOf((String) itemData.get("type"));
       Map<Enchantment, Integer> enchantments =
           gson.fromJson((String) itemData.get("enchantments"), HashMap.class);
       int amount = (int) itemData.get("amount");
@@ -81,15 +81,13 @@ public class Serializer {
       short durability = ((Number) itemData.get("durability")).shortValue();
       MaterialData data = gson.fromJson((String) itemData.get("data"), MaterialData.class);
 
-      ItemStack itemStack = new ItemStack(data.getItemType(), amount, durability);
+      ItemStack itemStack = new ItemStack(type, amount, durability);
 
-      if (itemMeta != null)
-        itemStack.setItemMeta(itemMeta);
+      if (itemMeta != null) itemStack.setItemMeta(itemMeta);
 
-      itemStack.setData(data);
+      if (data != null) itemStack.setData(data);
 
-      if (enchantments != null)
-        itemStack.addUnsafeEnchantments(enchantments);
+      if (enchantments != null) itemStack.addUnsafeEnchantments(enchantments);
 
       contents[index] = itemStack;
     }
@@ -124,8 +122,7 @@ public class Serializer {
       itemStack.setItemMeta(itemMeta);
       itemStack.setData(data);
 
-      if (enchantments != null)
-        itemStack.addUnsafeEnchantments(enchantments);
+      if (enchantments != null) itemStack.addUnsafeEnchantments(enchantments);
 
       inventory.setItem(index, itemStack);
     }
