@@ -43,7 +43,7 @@ public class Serializer {
       if (stack.hasItemMeta()) itemData.put("meta", gson.toJson(itemMeta, ItemMeta.class));
       if (data != null) itemData.put("data", gson.toJson(data, MaterialData.class));
 
-      itemData.put("amount", amount);
+      itemData.put("amount", gson.toJson(amount, Integer.class));
       itemData.put("durability", durability);
 
       items.put(index, gson.toJson(itemData));
@@ -77,9 +77,9 @@ public class Serializer {
       Material type = gson.fromJson((String) itemData.get("type"), Material.class);
       Map<Enchantment, Integer> enchantments =
           gson.fromJson((String) itemData.get("enchantments"), HashMap.class);
-      int amount = (int) itemData.get("amount");
+      int amount = gson.fromJson((String) itemData.get("amount"), Integer.class);
       ItemMeta itemMeta = gson.fromJson((String) itemData.get("meta"), ItemMeta.class);
-      short durability = ((Number) itemData.get("durability")).shortValue();
+      short durability = (gson.fromJson((String) itemData.get("durability"), Short.class));
       MaterialData data = gson.fromJson((String) itemData.get("data"), MaterialData.class);
 
       ItemStack itemStack = new ItemStack(type, amount, durability);
@@ -114,9 +114,9 @@ public class Serializer {
 
       Map<Enchantment, Integer> enchantments =
           gson.fromJson((String) itemData.get("enchantments"), HashMap.class);
-      int amount = (int) itemData.get("amount");
+      int amount = gson.fromJson((String) itemData.get("amount"), Integer.class);
       ItemMeta itemMeta = gson.fromJson((String) itemData.get("meta"), ItemMeta.class);
-      short durability = ((Number) itemData.get("durability")).shortValue();
+      short durability = gson.fromJson((String) itemData.get("durability"), Short.class);
       MaterialData data = gson.fromJson((String) itemData.get("data"), MaterialData.class);
 
       ItemStack itemStack = new ItemStack(data.getItemType(), amount, durability);
