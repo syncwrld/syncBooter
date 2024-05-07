@@ -78,14 +78,8 @@ public interface DatabaseHelper {
       }
     }
 
-    String query = "create table if not exists " + name + componentQuery.toString();
+    String query = "create table if not exists `" + name + "`" + componentQuery.toString();
     PreparedStatement prepared = prepare(connection, query);
-
-    try {
-      prepared.setString(1, name);
-    } catch (SQLException e) {
-      return false;
-    }
 
     try {
       return prepared.executeUpdate() != 0;
