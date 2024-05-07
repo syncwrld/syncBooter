@@ -24,8 +24,8 @@ public interface DatabaseHelper {
   default PreparedStatement prepare(Connection connection, String query) {
     return Async.run(
             () -> {
-              try (PreparedStatement prepared = connection.prepareStatement(query)) {
-                return prepared;
+              try {
+                return connection.prepareStatement(query);
               } catch (SQLException e) {
                 throw new RuntimeException(e);
               }
@@ -36,8 +36,8 @@ public interface DatabaseHelper {
   default ResultSet result(PreparedStatement prepared) {
     return Async.run(
             () -> {
-              try (ResultSet resultSet = prepared.executeQuery()) {
-                return resultSet;
+              try {
+                return prepared.executeQuery();
               } catch (SQLException e) {
                 throw new RuntimeException(e);
               }
@@ -86,7 +86,8 @@ public interface DatabaseHelper {
 
   public default void clearValues(Connection connection, int tableID) {
     if (!(this instanceof IdentifiableRepository)) {
-      throw new RuntimeException("Class must be a IdentifiableRepository to be able to clear values programmatically.");
+      throw new RuntimeException(
+          "Class must be a IdentifiableRepository to be able to clear values programmatically.");
     }
 
     IdentifiableRepository identifiableRepository = (IdentifiableRepository) this;
