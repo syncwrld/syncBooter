@@ -37,6 +37,7 @@ public class Serializer {
       short durability = stack.getDurability();
       val data = stack.getData();
 
+      itemData.put("type", gson.toJson(type));
       if ((enchantments != null) && !enchantments.isEmpty())
         itemData.put("enchantments", gson.toJson(enchantments));
       if (stack.hasItemMeta()) itemData.put("meta", gson.toJson(itemMeta, ItemMeta.class));
