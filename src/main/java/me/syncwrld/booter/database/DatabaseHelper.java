@@ -40,12 +40,6 @@ public interface DatabaseHelper {
                 return resultSet;
               } catch (SQLException e) {
                 throw new RuntimeException(e);
-              } finally {
-                try {
-                  prepared.close();
-                } catch (SQLException e) {
-                  e.printStackTrace();
-                }
               }
             })
         .join();
@@ -78,7 +72,7 @@ public interface DatabaseHelper {
       }
     }
 
-    String query = "create table if not exists `" + name + "`" + componentQuery.toString();
+    String query = "create table if not exists " + name + componentQuery.toString();
     PreparedStatement prepared = prepare(connection, query);
 
     try {
@@ -86,12 +80,6 @@ public interface DatabaseHelper {
     } catch (SQLException e) {
       e.printStackTrace();
       return false;
-    } finally {
-      try {
-        prepared.close();
-      } catch (SQLException e) {
-        e.printStackTrace();
-      }
     }
   }
 
