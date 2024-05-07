@@ -3,6 +3,8 @@ package me.syncwrld.booter.minecraft.serialization;
 import com.google.gson.Gson;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.google.gson.reflect.TypeToken;
 import lombok.val;
 import me.syncwrld.booter.Constants;
 import org.bukkit.Bukkit;
@@ -40,8 +42,10 @@ public class Serializer {
       itemData.put("type", gson.toJson(type, Material.class));
       if ((enchantments != null) && !enchantments.isEmpty())
         itemData.put("enchantments", gson.toJson(enchantments));
-      if (stack.hasItemMeta()) itemData.put("meta", gson.toJson(itemMeta, ItemMeta.class));
       if (data != null) itemData.put("data", gson.toJson(data, MaterialData.class));
+
+      TypeToken<ItemMeta> typeToken = new TypeToken<ItemMeta>() {};
+      if (stack.hasItemMeta()) itemData.put("meta", gson.toJson(itemMeta, typeToken.getType()));
 
       itemData.put("amount", gson.toJson(amount, Integer.class));
       itemData.put("durability", durability);
@@ -127,5 +131,5 @@ public class Serializer {
 
     return inventory;
   }
-  
+
 }
