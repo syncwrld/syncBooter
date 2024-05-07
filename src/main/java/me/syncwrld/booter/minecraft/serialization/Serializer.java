@@ -63,13 +63,13 @@ public class Serializer {
 
     InventoryType inventoryType =
         gson.fromJson((String) deserializationMap.get("type"), InventoryType.class);
-    Map<Integer, String> itemsMap =
+    Map<Object, String> itemsMap =
         gson.fromJson(gson.toJson(deserializationMap.get("content")), HashMap.class);
 
     ItemStack[] contents = new ItemStack[inventoryType.getDefaultSize()];
 
-    for (Map.Entry<Integer, String> entry : itemsMap.entrySet()) {
-      int index = entry.getKey();
+    for (Map.Entry<Object, String> entry : itemsMap.entrySet()) {
+      int index = gson.fromJson(entry.getKey().toString(), Integer.class);
       String itemDataJson = entry.getValue();
 
       Map<String, Object> itemData = gson.fromJson(itemDataJson, HashMap.class);
