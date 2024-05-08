@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>me.syncwrld</groupId>
-    <artifactId>syncBooter</artifactId>
+    <artifactId>booter</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -42,32 +42,74 @@
                             <relocations>
                                 <relocation>
                                     <pattern>com.google.gson</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.gson</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.gson
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
                                     <pattern>com.google.common</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.guava</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.guava
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
                                     <pattern>com.google.errorprone</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.errorprone</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.errorprone
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
                                     <pattern>com.google.common</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.guava</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.guava
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
                                     <pattern>com.google.j2objc</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.j2objc</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.j2objc
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>com.esotericsoftware.yamlbeans</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.yamlbeans
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
                                     <pattern>com.google.thirdparty</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.thirdparty</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.thirdparty
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>com.zaxxer.hikari</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.hikari
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>net.kyori</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.kyori
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>org.apache.commons</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.apccommons
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>org.intellij.lang.annotations</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.ijann
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>org.jetbrains.annotations</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.jtann
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
@@ -77,12 +119,20 @@
 
                                 <relocation>
                                     <pattern>org.reflections</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.reflections</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.reflections
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
                                     <pattern>org.checkerframework</pattern>
-                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.checkerfw</shadedPattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.checkerfw
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>team.unnamed</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.unnamed
+                                    </shadedPattern>
                                 </relocation>
 
                                 <relocation>
@@ -135,15 +185,27 @@
     <dependencies>
         <dependency>
             <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
+            <artifactId>spigot</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+            <version>4.0.3</version>
         </dependency>
 
         <dependency>
             <groupId>com.esotericsoftware.yamlbeans</groupId>
             <artifactId>yamlbeans</artifactId>
             <version>1.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>team.unnamed</groupId>
+            <artifactId>inject</artifactId>
+            <version>2.0.1</version>
         </dependency>
 
         <dependency>
@@ -175,6 +237,12 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.10.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.kyori</groupId>
+            <artifactId>adventure-text-serializer-gson</artifactId>
+            <version>4.16.0</version>
         </dependency>
 
         <dependency>

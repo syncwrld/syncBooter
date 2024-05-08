@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>me.syncwrld</groupId>
-  <artifactId>syncBooter</artifactId>
+  <artifactId>booter</artifactId>
   <name>syncBooter</name>
   <version>1.0-SNAPSHOT</version>
   <build>
@@ -54,8 +54,28 @@
                   <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.j2objc</shadedPattern>
                 </relocation>
                 <relocation>
+                  <pattern>com.esotericsoftware.yamlbeans</pattern>
+                  <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.yamlbeans</shadedPattern>
+                </relocation>
+                <relocation>
                   <pattern>com.google.thirdparty</pattern>
                   <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.thirdparty</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>net.kyori</pattern>
+                  <shadedPattern>${project.groupId}.${project.artifactId}.libs.google.kyori</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.apache.commons</pattern>
+                  <shadedPattern>${project.groupId}.${project.artifactId}.libs.apccommons</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.intellij.lang.annotations</pattern>
+                  <shadedPattern>${project.groupId}.${project.artifactId}.libs.ijann</shadedPattern>
+                </relocation>
+                <relocation>
+                  <pattern>org.jetbrains.annotations</pattern>
+                  <shadedPattern>${project.groupId}.${project.artifactId}.libs.jtann</shadedPattern>
                 </relocation>
                 <relocation>
                   <pattern>org.objectweb.asm</pattern>
@@ -105,7 +125,7 @@
   <dependencies>
     <dependency>
       <groupId>org.spigotmc</groupId>
-      <artifactId>spigot-api</artifactId>
+      <artifactId>spigot</artifactId>
       <version>1.8.8-R0.1-SNAPSHOT</version>
       <scope>provided</scope>
     </dependency>
