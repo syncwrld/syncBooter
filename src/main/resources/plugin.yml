@@ -1,0 +1,12 @@
+main: me.syncwrld.booter.minecraft.SpigotLoader
+name: syncBooter
+description: SyncBooter
+version: 1.0.0
+author: syncwrld
+
+softdepend:
+  - PlaceholderAPI
+  - Vault
+  - WorldEdit
+  - WorldGuard
+  - NBTAPI
