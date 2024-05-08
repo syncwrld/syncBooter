@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
@@ -43,6 +44,92 @@ public interface DatabaseHelper {
               }
             })
         .join();
+  }
+
+  default void insert(String tableId, Connection connection, String... values) {
+    int valuesLength = values.length;
+
+    StringBuilder query = new StringBuilder();
+    query.append("insert into ").append(tableId).append(" values (");
+    for (int i = 0; i < valuesLength; i++) {
+      query.append("?");
+      if (i != valuesLength - 1) {
+        query.append(", ");
+      }
+    }
+    query.append(")");
+
+    PreparedStatement prepared = prepare(connection, query.toString());
+    try {
+      for (int i = 0; i < valuesLength; i++) {
+        prepared.setString(i + 1, values[i]);
+      }
+      prepared.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+  }
+
+  default <T> T get(
+      int tableId, Connection connection, String primaryKey, String key, Class<T> type) {
+    PreparedStatement prepare =
+        this.prepare(connection, "select * from " + tableId + " where " + primaryKey + " = ?");
+
+    try {
+      prepare.setString(1, key);
+      ResultSet result = prepare.executeQuery();
+      if (result.next()) {
+        return type.cast(result.getObject(1));
+      } else {
+        return null;
+      }
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  default <T> ArrayList<T> select(
+      String tableId, Connection connection, String condition, Class<T> type) {
+    PreparedStatement prepare =
+        this.prepare(connection, "select * from " + tableId + " where " + condition);
+
+    try {
+      ResultSet result = prepare.executeQuery();
+      ArrayList<T> list = new ArrayList<>();
+      while (result.next()) {
+        list.add(type.cast(result.getObject(1)));
+      }
+      return list;
+    } catch (SQLException e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
+  default void replace(
+      String tableId, Connection connection, int valuesLength, String where, String... values) {
+    StringBuilder query = new StringBuilder();
+
+    query.append("replace into ").append(tableId).append(" values (");
+    for (int i = 0; i < valuesLength; i++) {
+      query.append("?");
+      if (i != valuesLength - 1) {
+        query.append(", ");
+      }
+    }
+    query.append(")");
+    query.append(" where ").append(where);
+
+    PreparedStatement prepared = prepare(connection, query.toString());
+    try {
+      for (int i = 0; i < valuesLength; i++) {
+        prepared.setString(i + 1, values[i]);
+      }
+      prepared.executeUpdate();
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
   }
 
   default boolean createTable(Connection connection, String name, TableComponent... components) {
