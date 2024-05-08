@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -83,7 +84,11 @@ public class SimpleDatabaseConnector {
 
     if (!sqliteFile.exists()) {
       sqliteFile.getParentFile().mkdirs();
-      sqliteFile.createNewFile();
+        try {
+            sqliteFile.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     try {
