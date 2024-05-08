@@ -10,6 +10,7 @@ import lombok.SneakyThrows;
 import lombok.experimental.Tolerate;
 import me.syncwrld.booter.common.tool.JsonParser;
 
+@Deprecated
 public class DatabaseConnector {
 
   private final String databaseType;
