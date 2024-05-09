@@ -130,6 +130,18 @@
                                 </relocation>
 
                                 <relocation>
+                                    <pattern>me.lucko.helper</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.helper
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
+                                    <pattern>me.lucko.shadow</pattern>
+                                    <shadedPattern>${project.groupId}.${project.artifactId}.libs.shadow
+                                    </shadedPattern>
+                                </relocation>
+
+                                <relocation>
                                     <pattern>team.unnamed</pattern>
                                     <shadedPattern>${project.groupId}.${project.artifactId}.libs.unnamed
                                     </shadedPattern>
@@ -187,6 +199,13 @@
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>me.lucko</groupId>
+            <artifactId>helper</artifactId>
+            <version>5.6.13</version>
             <scope>provided</scope>
         </dependency>
 
