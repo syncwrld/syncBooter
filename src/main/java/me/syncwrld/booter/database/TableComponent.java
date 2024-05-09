@@ -1,6 +1,7 @@
 package me.syncwrld.booter.database;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
 public class TableComponent {
@@ -28,8 +29,10 @@ public class TableComponent {
     this(type, identifier, false, true);
   }
 
+  @Getter
   public static enum Type {
     TEXT("TEXT"),
+    STRING("TEXT"),
     JSON("JSON"),
     INT("INT"),
     BOOLEAN("BOOLEAN"),
@@ -38,6 +41,7 @@ public class TableComponent {
     BIGINT("BIGINT"),
     TINYINT("TINYINT"),
     DATE("DATE"),
+    UUID("VARCHAR(36)"),
     VARCHAR_255("VARCHAR(255)"),
     VARCHAR_128("VARCHAR(128)"),
     VARCHAR_64("VARCHAR(64)"),
@@ -51,8 +55,5 @@ public class TableComponent {
       this.correspondent = correspondent;
     }
 
-    public String getCorrespondent() {
-      return correspondent;
-    }
   }
 }
