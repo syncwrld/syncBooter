@@ -71,12 +71,12 @@ public interface DatabaseHelper {
   }
 
   default <T> T get(
-      int tableId, Connection connection, String primaryKey, String key, Class<T> type) {
+      int tableId, Connection connection, String getWhat, String primaryKeyIdentifier, String primaryKeyEquals, Class<T> type) {
     PreparedStatement prepare =
-        this.prepare(connection, "select * from " + tableId + " where " + primaryKey + " = ?");
+        this.prepare(connection, "select " + getWhat + " from " + tableId + " where " + primaryKeyIdentifier + " = ?");
 
     try {
-      prepare.setString(1, key);
+      prepare.setString(1, primaryKeyEquals);
       ResultSet result = prepare.executeQuery();
       if (result.next()) {
         return type.cast(result.getObject(1));
