@@ -71,9 +71,9 @@ public interface DatabaseHelper {
   }
 
   default <T> T get(
-      int tableId, Connection connection, String getWhat, String primaryKeyIdentifier, String primaryKeyEquals, Class<T> type) {
+      String tableIdentifier, Connection connection, String getWhat, String primaryKeyIdentifier, String primaryKeyEquals, Class<T> type) {
     PreparedStatement prepare =
-        this.prepare(connection, "select " + getWhat + " from " + tableId + " where " + primaryKeyIdentifier + " = ?");
+        this.prepare(connection, "select " + getWhat + " from " + tableIdentifier + " where " + primaryKeyIdentifier + " = ?");
 
     try {
       prepare.setString(1, primaryKeyEquals);
