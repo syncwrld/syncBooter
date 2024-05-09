@@ -92,9 +92,9 @@ public class SimpleDatabaseConnector {
     }
 
     try {
+      Class.forName("org.sqlite.JDBC");
       this.connection =
           DriverManager.getConnection("jdbc:sqlite:" + this.sqliteFile.getAbsolutePath());
-      Class.forName("org.sqlite.JDBC");
       return true;
     } catch (SQLException | ClassNotFoundException e) {
       throw new RuntimeException(e);
