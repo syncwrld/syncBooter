@@ -14,10 +14,12 @@ import java.util.Collection;
 import java.util.Locale;
 import lombok.experimental.Tolerate;
 import me.syncwrld.booter.minecraft.ConstantData;
-import me.syncwrld.booter.minecraft.tool.etc.LocationSerializer;
+import me.syncwrld.booter.minecraft.config.YAML;
+import me.syncwrld.booter.minecraft.serialization.LocationSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Server;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.event.Event;
@@ -31,7 +33,17 @@ public abstract class BukkitPlugin extends JavaPlugin {
   protected final Gson gson = new GsonBuilder().setPrettyPrinting().create();
   protected final Collection<ConstantData> dataCollection = new ArrayList<>();
   protected String[] asciiArt = {};
-  protected FileConfiguration configuration = this.getConfig();
+  protected YAML configuration;
+  protected boolean configurationDefault = true;
+
+  {
+    try {
+      configuration = new YAML("configuration", this);
+    } catch (IOException | InvalidConfigurationException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
   private String prefix = "";
   private boolean autoDataRegistry = true;
 
@@ -43,6 +55,10 @@ public abstract class BukkitPlugin extends JavaPlugin {
     for (Event event : events) {
       callEvent(event);
     }
+  }
+
+  public void setConfigurationAsDefault(boolean b) {
+    this.configurationDefault = b;
   }
 
   protected abstract void whenLoad();
@@ -113,7 +129,15 @@ public abstract class BukkitPlugin extends JavaPlugin {
 
   @Deprecated
   public FileConfiguration getConfig() {
-    return super.getConfig();
+    if (this.configurationDefault) {
+      return this.getConfigOf("configuration");
+    } else {
+      return super.getConfig();
+    }
+  }
+
+  public YAML getConfiguration() {
+    return this.configuration;
   }
 
   public FileConfiguration getConfigOf(String config) {
@@ -211,13 +235,20 @@ public abstract class BukkitPlugin extends JavaPlugin {
 
   @Override
   public void saveDefaultConfig() {
-    this.saveFile("configuration.yml");
+    if (this.configurationDefault) {
+      this.saveFile("configuration.yml");
+    } else {
+      super.saveDefaultConfig();
+    }
   }
 
   @Override
   public void saveConfig() {
-    this.saveFile("configuration.yml");
-    this.configuration = this.getConfig();
+    if (this.configurationDefault) {
+      this.saveFile("configuration.yml");
+    } else {
+      super.saveConfig();
+    }
   }
 
   public String serialize(Object object) {
