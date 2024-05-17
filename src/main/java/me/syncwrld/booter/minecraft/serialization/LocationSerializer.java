@@ -1,4 +1,4 @@
-package me.syncwrld.booter.minecraft.tool.etc;
+package me.syncwrld.booter.minecraft.serialization;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
