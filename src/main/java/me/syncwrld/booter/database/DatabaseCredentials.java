@@ -13,6 +13,7 @@ public class DatabaseCredentials {
 
   public static DatabaseCredentials withConfiguration(FileConfiguration configuration) {
     final ConfigurationSection databaseSection = configuration.getConfigurationSection("database");
+    assert databaseSection != null;
     return new DatabaseCredentials(
         databaseSection.getString("username"),
         databaseSection.getString("password"),
