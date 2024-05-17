@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import me.syncwrld.booter.annotation.IncludeOnGetter;
+import me.syncwrld.booter.database.BukkitDatabaseCredentials;
 import me.syncwrld.booter.database.DatabaseCredentials;
 import me.syncwrld.booter.database.connector.sample.DatabaseType;
 
