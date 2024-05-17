@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/booter.iml" filepath="$PROJECT_DIR$/booter.iml" />
       <module fileurl="file://$PROJECT_DIR$/syncBooter.iml" filepath="$PROJECT_DIR$/syncBooter.iml" />
     </modules>
   </component>
