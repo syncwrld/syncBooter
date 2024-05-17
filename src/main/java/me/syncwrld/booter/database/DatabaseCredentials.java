@@ -10,14 +10,4 @@ public class DatabaseCredentials {
   private final String password;
   private final String host;
   private final String database;
-
-  public static DatabaseCredentials withConfiguration(FileConfiguration configuration) {
-    final ConfigurationSection databaseSection = configuration.getConfigurationSection("database");
-    assert databaseSection != null;
-    return new DatabaseCredentials(
-        databaseSection.getString("username"),
-        databaseSection.getString("password"),
-        databaseSection.getString("host"),
-        databaseSection.getString("database"));
-  }
 }
