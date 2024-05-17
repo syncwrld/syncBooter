@@ -65,5 +65,5 @@ public class JsonParser {
       Constants.GSON.toJson(array, writer);
     }
   }
-  
+
 }
