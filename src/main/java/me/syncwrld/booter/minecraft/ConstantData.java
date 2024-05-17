@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 import lombok.SneakyThrows;
 
-public interface ConstantData {
+public interface ConstantData extends Serializable {
   void load();
 
   @SneakyThrows
