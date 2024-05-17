@@ -34,4 +34,11 @@ public class BukkitDatabaseCredentials {
         databaseSection.getString("database"));
   }
 
+  public static DatabaseCredentials morph(BukkitDatabaseCredentials credentials) {
+    return new DatabaseCredentials(
+        credentials.getUsername(),
+        credentials.getPassword(),
+        credentials.getHost(),
+        credentials.getDatabase());
+  }
 }
