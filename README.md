@@ -2,12 +2,6 @@
 ![Logo](https://i.imgur.com/9b2R2b6.png)
 
 
-## Contributors
-
-- [@syncwrld](https://www.github.com/syncwrld) - main developer
-- [@nexyy](https://github.com/nexxyy) - help to fix performance issues
-
-
 
 ## Setup Project
  - Create a new project, prefer to use [IntelliJ Idea](https://www.jetbrains.com/pt-br/idea/) as your IDE
