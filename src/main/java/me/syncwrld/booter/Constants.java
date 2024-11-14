@@ -7,5 +7,4 @@ import java.util.logging.Logger;
 public class Constants {
   public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
   public static String NAME = "syncBooter";
-  public static Logger LOGGER = Booter.getLogger();
 }

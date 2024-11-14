@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/OpenSource Projects.syncBooter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/OpenSource Projects.syncBooter.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/OpenSource Projects.syncBooter.test.iml" filepath="$PROJECT_DIR$/.idea/modules/OpenSource Projects.syncBooter.test.iml" />
-      <module fileurl="file://$PROJECT_DIR$/syncBooter.iml" filepath="$PROJECT_DIR$/syncBooter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/me.syncwrld.syncBooter.main.iml" filepath="$PROJECT_DIR$/.idea/modules/me.syncwrld.syncBooter.main.iml" />
     </modules>
   </component>
 </project>

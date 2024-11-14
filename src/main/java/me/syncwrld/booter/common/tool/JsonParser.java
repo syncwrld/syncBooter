@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 import java.io.*;
 import lombok.SneakyThrows;
-import me.syncwrld.booter.Booter;
 import me.syncwrld.booter.Constants;
 
 public class JsonParser {
@@ -13,7 +12,7 @@ public class JsonParser {
   @SneakyThrows
   public JsonObject getObject(File file) {
     if (!(file.exists())) {
-      Booter.getLogger().info("File not found: " + file.getAbsolutePath());
+      throw new FileNotFoundException("File not found: " + file.getAbsolutePath());
     }
     try (Reader reader = new FileReader(file)) {
       JsonReader jsonReader = new JsonReader(reader);
@@ -30,9 +29,9 @@ public class JsonParser {
     }
   }
 
-  public JsonArray getArray(File file) {
+  public JsonArray getArray(File file) throws FileNotFoundException {
     if (!(file.exists())) {
-      Booter.getLogger().info("File not found: " + file.getAbsolutePath());
+      throw new FileNotFoundException("File not found: " + file.getAbsolutePath());
     }
     try (Reader reader = new FileReader(file)) {
       JsonReader jsonReader = new JsonReader(reader);

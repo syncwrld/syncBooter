@@ -15,14 +15,11 @@ import me.syncwrld.booter.database.BukkitDatabaseCredentials;
 import me.syncwrld.booter.database.DatabaseCredentials;
 import me.syncwrld.booter.database.connector.sample.DatabaseType;
 
-@Getter(
-    value = AccessLevel.PUBLIC,
-    onMethod_ = {@IncludeOnGetter})
+@Getter(value = AccessLevel.PUBLIC)
 public class SimpleDatabaseConnector {
 
-  @IncludeOnGetter private final DatabaseType databaseType;
-
-  @IncludeOnGetter private Connection connection;
+  private final DatabaseType databaseType;
+  private Connection connection;
 
   private File sqliteFile;
   private DatabaseCredentials databaseCredentials;
