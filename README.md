@@ -44,4 +44,4 @@ For Gradle:
 - None - syncBooter is a library and don't own any commands
 
 ## Docs
-While `syncBooter` hasn't any official documentation, the JavaDocs are located [here](https://booterdocs.syncwrld.tech).
+While `syncBooter` hasn't any official documentation, the JavaDocs are located [here](https://jd.booter.syncwrld.me/).
